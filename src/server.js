@@ -34,9 +34,10 @@ export const setupServer = () => {
     app.get('/contacts', async (req, res) => {
       const contacts = await getContacts();
 
+
       res.status(200).json({
         message: 'Successfully found contacts!',
-        data: contacts
+        data: contacts,
       });
     });
 
@@ -46,7 +47,8 @@ export const setupServer = () => {
 
       res.status(200).json({
         message: `Successfully found contact with id ${contactId}!`,
-        data: contact
+        data: contact,
+
       });
     });
 
