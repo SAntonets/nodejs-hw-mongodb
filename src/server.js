@@ -36,6 +36,7 @@ export const setupServer = () => {
 
 
       res.status(200).json({
+        status: `${res.statusCode}`,
         message: 'Successfully found contacts!',
         data: contacts,
       });
@@ -46,6 +47,7 @@ export const setupServer = () => {
       const contactId = req.params.id;
 
       res.status(200).json({
+        status: `${res.statusCode}`,
         message: `Successfully found contact with id ${contactId}!`,
         data: contact,
 
