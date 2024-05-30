@@ -2,7 +2,7 @@ import { contactsCollection } from "../db/models/contact.js";
 
 
 
-export const getContacts = async () => {
+export const getAllContacts = async () => {
     try {
         const contacts = await contactsCollection.find();
         return contacts;
