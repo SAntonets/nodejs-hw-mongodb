@@ -28,6 +28,6 @@ export const createContact = async (payload) => {
 
 
 export const deleteContact = async (id) => {
-    const student = await contactsCollection.findByIdAndDelete({ _id: id });
+    const student = await contactsCollection.findOneAndDelete({ _id: id });
     return student;
 }
