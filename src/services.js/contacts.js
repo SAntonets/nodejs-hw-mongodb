@@ -16,7 +16,6 @@ export const getContactById = async (id) => {
         const contact = await contactsCollection.findById(id);
         return contact;
     } catch (error) {
-        console.log(error);
     }
 }
 
@@ -27,6 +26,7 @@ export const createContact = async (payload) => {
 }
 
 export const patchContact = async (id, payload, options = {}) => {
+    try {
     const rawResult = await contactsCollection.findOneAndUpdate(
         { _id: id },
         payload,
@@ -43,12 +43,23 @@ export const patchContact = async (id, payload, options = {}) => {
         contact: rawResult.value,
         isNew: Boolean(rawResult?.lastErrorObject?.upserted),
     };
+    } catch (error) {
+    }
 };
 
 
 
 
 export const deleteContact = async (id) => {
-    const student = await contactsCollection.findOneAndDelete({ _id: id });
-    return student;
+    try {
+    const contact = await contactsCollection.findById(id);
+
+        if (!contact || !contact.value) return null;
+
+        const contactToDelete = await contactsCollection.findOneAndDelete(
+            { _id: id });
+
+    return contactToDelete;
+    } catch (error) {
+    }
 }
