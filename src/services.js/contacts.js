@@ -52,14 +52,10 @@ export const patchContact = async (id, payload, options = {}) => {
 
 export const deleteContact = async (id) => {
     try {
-    const contact = await contactsCollection.findById(id);
-
-        if (!contact || !contact.value) return null;
-
         const contactToDelete = await contactsCollection.findOneAndDelete(
             { _id: id });
 
-    return contactToDelete;
+        return contactToDelete;
     } catch (error) {
     }
 }
