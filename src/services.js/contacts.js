@@ -54,7 +54,7 @@ export const deleteContact = async (id) => {
     try {
         const contactToDelete = await contactsCollection.findOneAndDelete({ _id: id, });
 
-        return contactToDelete;
+        return contactToDelete.value;
     } catch (error) {
     }
 }
