@@ -59,6 +59,7 @@ export const patchContactController = async (req, res, next) => {
 
 export const deleteContactController = async (req, res, next) => {
     const { id } = req.params;
+    console.log(id)
 
     const contact = await deleteContact(id);
 
@@ -67,5 +68,5 @@ export const deleteContactController = async (req, res, next) => {
         return;
     }
 
-    res.status(204).send()
+    res.status(204)
 }
