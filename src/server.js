@@ -2,7 +2,9 @@ import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
 import { env } from '../src/utils/env.js';
-import { getContactById, getContacts } from './services.js/contacts.js';
+import contactsRouter from './routers/contacts.js'
+import { errorHandler } from './middlewares/errorHandler.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
 
 
@@ -31,51 +33,17 @@ export const setupServer = () => {
         });
     });
 
-    app.get('/contacts', async (req, res) => {
-      const contacts = await getContacts();
+    app.use(contactsRouter)
 
 
-      res.status(200).json({
-        status: `${res.statusCode}`,
-        message: 'Successfully found contacts!',
-        data: contacts,
-      });
-    });
+    app.use(errorHandler);
 
-    app.get('/contacts/:id', async (req, res) => {
-      const contact = await getContactById(req.params.id);
-      const contactId = req.params.id;
+    app.use('*', notFoundHandler);
 
-      res.status(200).json({
-        status: `${res.statusCode}`,
-        message: `Successfully found contact with id ${contactId}!`,
-        data: contact,
-
-      });
-    });
-
-
-    app.use('*', (req, res, next) => {
-    res.status(404).json({
-      message: 'Not found',
-    });
-  });
-
-  app.use((err, req, res, next) => {
-    res.status(500).json({
-      message: 'Something went wrong',
-      error: err.message,
-    });
-  });
 
     app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-
-
-
-
-    })
-}
+        console.log(`Server is running on port ${PORT}`);})
+    }
 
 
 
