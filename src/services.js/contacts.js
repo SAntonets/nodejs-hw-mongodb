@@ -8,17 +8,15 @@ export const getAllContacts = async ({ page, perPage }) => {
     const skip = (page - 1) * perPage;
 
     const contactsQuery = contactsCollection.find();
-    const contactsCount = await contactsCollection.find().merge(contactsQuery).countDocuments();
+    const contactsCount = await contactsCollection.find().
+    merge(contactsQuery).countDocuments();
 
-    try {
-        const contacts = await contactsCollection.skip(skip).limit(limit).exec();
+
+        const contacts = await contactsQuery.skip(skip).limit(limit).exec();
 
         const paginationData = calculatePaginationData(contactsCount, perPage, page);
 
         return {data: contacts, ...paginationData};
-    } catch (error) {
-        console.log(error);
-    }
 }
 
 export const getContactById = async (id) => {
