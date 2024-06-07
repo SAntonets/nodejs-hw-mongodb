@@ -19,7 +19,7 @@ export const createContactSchema = Joi.object({
     isFavourite: Joi.boolean().messages({
         'boolean.base': 'Is favourite must be a type of boolean',
     }),
-    contactType: Joi.string().valid('work', 'home', 'personal').required().messages({
+    contactType: Joi.string().valid('work', 'home', 'personal').messages({
         'string.base': 'Contact type must be a type of string',
         'any.only': 'Contact type must be one of the following values: work, home, personal',
         'any.required': 'Contact type is required',
