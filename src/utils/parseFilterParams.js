@@ -7,8 +7,6 @@ const parseType = (type) => {
   };
 
 const parseIsFavourite = (isFavourite) => {
-    const isBoolean = typeof isFavourite === 'boolean';
-    if (!isBoolean) return;
     return isFavourite;
   };
 
@@ -19,6 +17,8 @@ const parseIsFavourite = (isFavourite) => {
 
     const parsedType = parseType(type);
     const parsedIsFavourite = parseIsFavourite(isFavourite);
+
+    console.log({ parsedType, parsedIsFavourite });
 
     return {
       type: parsedType,
