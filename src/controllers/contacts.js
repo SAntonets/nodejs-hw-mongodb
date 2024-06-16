@@ -1,4 +1,4 @@
-import { createContact, getAllContacts, getContactById, deleteContact, patchContact } from "../services.js/contacts.js";
+import { createContact, getAllContacts, getContactById, deleteContact, patchContact } from "../services/contacts.js";
 import createHttpError from "http-errors";
 import { parsePaginationParams } from "../utils/parsePaginationParams.js";
 import { parseSortParams } from "../utils/parseSortParams.js";
