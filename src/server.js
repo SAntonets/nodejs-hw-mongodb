@@ -1,11 +1,12 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+
 import { env } from '../src/utils/env.js';
 import router from './routers/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
-
 
 
 
@@ -39,6 +40,8 @@ export const setupServer = () => {
     app.use(errorHandler);
 
     app.use('*', notFoundHandler);
+
+    app.use(cookieParser());
 
 
     app.listen(PORT, () => {
