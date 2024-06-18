@@ -46,3 +46,8 @@ export const loginUser = async ({ email, password }) => {
 };
 
 
+export const logoutUser = async (sessionID) => {
+  await SessionsCollection.deleteOne({ _id: sessionID });
+};
+
+
