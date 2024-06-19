@@ -10,24 +10,29 @@ import { validateBody } from "../middlewares/validateBody.js";
 import { createContactSchema,
     updateContactSchema } from "../validation/contacts.js";
 import { authenticate } from "../middlewares/authenticate.js";
+import { checkRoles } from "../middlewares/checkRoles.js";
+import { ROLES } from "../constants/index.js";
 
 
 const router = Router();
 
-router.get('/', ctrlWrapper(getContactsController));
+router.get('/', checkRoles(ROLES.CONTACTOWNER), ctrlWrapper(getContactsController));
 
-router.get('/:id', ctrlWrapper(getContactByIdController));
+router.get('/:id', checkRoles(ROLES.CONTACTOWNER), ctrlWrapper(getContactByIdController));
 
-router.post('',
+router.post('', checkRoles(ROLES.CONTACTOWNER),
     validateBody(createContactSchema),
     ctrlWrapper(createContactController)
 )
 
 router.patch('/:id',
+    checkRoles(ROLES.CONTACTOWNER),
     validateBody(updateContactSchema),
     ctrlWrapper(patchContactController))
 
-router.delete('/:id', ctrlWrapper(deleteContactController)
+router.delete('/:id',
+    checkRoles(ROLES.CONTACTOWNER),
+     ctrlWrapper(deleteContactController)
 )
 
 router.use(authenticate);
