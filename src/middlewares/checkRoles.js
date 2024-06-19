@@ -1,7 +1,9 @@
 import createHttpError from "http-errors";
 
-import { contactsCollection } from "../db/models/contact";
+
 import { ROLES } from "../constants";
+import { contactsCollection } from "../db/models/contact";
+
 
 
 export const checkRoles = (...roles) => async (req, res, next) => {
