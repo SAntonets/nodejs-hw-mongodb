@@ -1,8 +1,8 @@
 import createHttpError from "http-errors";
 
 
-import { ROLES } from "../constants";
-import { contactsCollection } from "../db/models/contact";
+import {contactsCollection} from "../db/models/contact.js";
+import {ROLES} from "../constants/index.js";
 
 
 
