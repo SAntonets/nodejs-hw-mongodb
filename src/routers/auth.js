@@ -6,18 +6,15 @@ import { loginUserSchema, registerUserSchema } from '../validation/auth.js';
 import { loginUserController, logoutUserController, refreshUserSessionController, registerUserController } from '../controllers/auth.js';
 import { validateBody } from '../middlewares/validateBody.js';
 
-const router = Router();
+const authRouter = Router();
 
-router.post(
-  '/register',
-  validateBody(registerUserSchema),
-  ctrlWrapper(registerUserController),
-);
+authRouter.post('/register', validateBody(registerUserSchema), ctrlWrapper(registerUserController));
 
-export default router;
+authRouter.post('/login', validateBody(loginUserSchema), ctrlWrapper(loginUserController));
 
-router.post('/login', validateBody(loginUserSchema), ctrlWrapper(loginUserController));
+authRouter.post('/logout', ctrlWrapper(logoutUserController));
 
-router.post('/logout', ctrlWrapper(logoutUserController));
+authRouter.post('/refresh', ctrlWrapper(refreshUserSessionController));
 
-router.post('/refresh', ctrlWrapper(refreshUserSessionController));
+
+export default authRouter;

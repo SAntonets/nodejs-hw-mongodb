@@ -18,12 +18,13 @@ const encryptedPassword = await bcrypt.hash(payload.password, 10);
   });
 };
 
-export const loginUser = async ({ email, password }) => {
-  const user = await UsersCollection.findOne({ email: email });
+export const loginUser = async ( payload ) => {
+  const user = await UsersCollection.findOne({ email: payload.email });
   if (!user) {
     throw createHttpError(404, 'User not found');
   }
-  const isEqual = await bcrypt.compare(password, user.password);
+
+  const isEqual = await bcrypt.compare(payload.password, user.password);
 
 
   if (!isEqual) {
@@ -38,7 +39,7 @@ export const loginUser = async ({ email, password }) => {
   return await SessionsCollection.create({
     userID: user._id,
     accessToken,
-    refreshToken,
+    refreshToken, 
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
     refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
   });
