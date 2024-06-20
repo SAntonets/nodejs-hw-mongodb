@@ -18,6 +18,7 @@ export const setupServer = () => {
     const app = express();
 
     app.use(express.json());
+
     app.use(cors());
 
     // app.use(
@@ -28,6 +29,8 @@ export const setupServer = () => {
     //    }),
     // );
 
+    app.use(cookieParser());
+
     app.get('/', (req, res) => {
         res.json({
         message: 'Hello World!',
@@ -36,13 +39,9 @@ export const setupServer = () => {
 
     app.use(router)
 
-
     app.use(errorHandler);
 
     app.use('*', notFoundHandler);
-
-    app.use(cookieParser());
-
 
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);})

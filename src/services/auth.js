@@ -39,7 +39,7 @@ export const loginUser = async ( payload ) => {
   return await SessionsCollection.create({
     userID: user._id,
     accessToken,
-    refreshToken, 
+    refreshToken,
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
     refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
   });
@@ -66,6 +66,8 @@ const createSession = () => {
 }
 
 export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
+console.log(sessionId, refreshToken);
+
   const session = await SessionsCollection.findOne({
     _id: sessionId,
     refreshToken,
