@@ -38,7 +38,6 @@ export const loginUser = async ( payload ) => {
 
   const userId = user._id;
 
-
   return await SessionsCollection.create({
     userId,
     accessToken,
@@ -55,14 +54,16 @@ export const logoutUser = async (sessionID) => {
 };
 
 
-const createSession = async () => {
+const createSession = () => {
+  const accessToken = randomBytes(30).toString('base64');
+  const refreshToken = randomBytes(30).toString('base64');
+
   return {
-    accessToken: randomBytes(30).toString('base64'),
-    refreshToken: randomBytes(30).toString('base64'),
+    accessToken,
+    refreshToken,
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
     refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
   };
-
 };
 
 
@@ -70,8 +71,6 @@ export const refreshUsersSession = async ({ sessionID, refreshToken }) => {
 
 
    const session = await SessionsCollection.findOne({_id: sessionID, refreshToken: refreshToken});
-
-
 
   if(!session) {
     throw createHttpError(401, 'Session not found');
@@ -84,7 +83,6 @@ export const refreshUsersSession = async ({ sessionID, refreshToken }) => {
 
   const user = await UsersCollection.findById(session.userId);
 
-  console.log(user);
 
   if(!user) {
     throw createHttpError(401, 'User not found');
@@ -94,7 +92,7 @@ export const refreshUsersSession = async ({ sessionID, refreshToken }) => {
 
   return await SessionsCollection.create({
     ...createSession(),
-    userID: user._id,
+    userId: user._id,
   })
 
 
