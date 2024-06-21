@@ -27,9 +27,10 @@ const contactsSchema = new Schema(
         default: 'personal',
         enum: ['work', 'home', 'personal'],
         },
-    userID: {
+    userId: {
         type: Schema.Types.ObjectId,
         ref: 'users',
+        required: true,
     }
   },
   {

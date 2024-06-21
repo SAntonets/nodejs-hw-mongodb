@@ -16,6 +16,8 @@ import { ROLES } from "../constants/index.js";
 
 const router = Router();
 
+router.use('/', authenticate);
+
 router.get('/', checkRoles(ROLES.CONTACTOWNER), ctrlWrapper(getContactsController));
 
 router.get('/:id', checkRoles(ROLES.CONTACTOWNER), ctrlWrapper(getContactByIdController));
@@ -34,8 +36,6 @@ router.delete('/:id',
     checkRoles(ROLES.CONTACTOWNER),
      ctrlWrapper(deleteContactController)
 )
-
-router.use(authenticate);
 
 router.get('/', ctrlWrapper(getContactsController));
 
