@@ -31,13 +31,16 @@ export const loginUser = async ( payload ) => {
     throw createHttpError(401, 'Unauthorized');
   }
 
-  await SessionsCollection.deleteOne({ userID: user._id });
+  await SessionsCollection.deleteOne({ userId: user._id });
 
   const accessToken = randomBytes(30).toString('base64');
   const refreshToken = randomBytes(30).toString('base64');
 
+  const userId = user._id;
+
+
   return await SessionsCollection.create({
-    userID: user._id,
+    userId,
     accessToken,
     refreshToken,
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
@@ -63,8 +66,12 @@ const createSession = async () => {
 };
 
 
-export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
-   const session = await SessionsCollection.findOne({_id: sessionId, refreshToken: refreshToken});
+export const refreshUsersSession = async ({ sessionID, refreshToken }) => {
+
+
+   const session = await SessionsCollection.findOne({_id: sessionID, refreshToken: refreshToken});
+
+
 
   if(!session) {
     throw createHttpError(401, 'Session not found');
@@ -74,7 +81,10 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
     throw createHttpError(401, 'Refresh token expired');
   }
 
-  const user = await UsersCollection.findById(session.userID);
+
+  const user = await UsersCollection.findById(session.userId);
+
+  console.log(user);
 
   if(!user) {
     throw createHttpError(401, 'User not found');
