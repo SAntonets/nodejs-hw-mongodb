@@ -1,5 +1,5 @@
 import { ONE_DAY } from '../constants/index.js';
-import { logoutUser, refreshUsersSession, registerUser } from '../services/auth.js';
+import { logoutUser, refreshUsersSession, registerUser, requestResetToken } from '../services/auth.js';
 import { loginUser } from '../services/auth.js';
 
 export const registerUserController = async (req, res) => {
@@ -73,4 +73,14 @@ export const refreshUserSessionController = async (req, res, next) => {
     },
   });
 
+};
+
+
+export const requestResetEmailController = async (req, res) => {
+  await requestResetToken(req.body.email);
+  res.json({
+    status: 200,
+    data: {},
+    message: 'Reset password email has been successfully sent.',
+  });
 };

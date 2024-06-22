@@ -94,7 +94,14 @@ export const refreshUsersSession = async ({ sessionID, refreshToken }) => {
     ...createSession(),
     userId: user._id,
   })
+};
 
+
+export const requestResetToken = async (email) => {
+  const user = await UsersCollection.findOne({ email });
+  if (!user) {
+    throw createHttpError(404, 'User not found');
+  }
 
 
 };
