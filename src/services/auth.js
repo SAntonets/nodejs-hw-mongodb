@@ -112,16 +112,20 @@ export const requestResetToken = async (email) => {
     },
     env('JWT_SECRET'),
     {
-      expiresIn: '15m',
+      expiresIn: '5m',
     },
   );
 
-  await sendEmail({
+  try { await sendEmail({
     from: env(SMTP.SMTP_FROM),
     to: email,
     subject: 'Reset your password',
-    html: `<p>Click <a href="${resetToken}">here</a> to reset your password!</p>`,
+    html: `<p>Click <a href="https://${env('APP_DOMAIN')}/reset-password?token=${resetToken}">here</a> to reset your password! ${resetToken} </p>`,
   });
+      } catch (err) {
+        console.log(err);
+        throw createHttpError(500, 'Failed to send the email, please try again later.');
+  }
 };
 
 
