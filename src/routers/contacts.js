@@ -23,16 +23,17 @@ router.get('/', checkRoles(ROLES.CONTACTOWNER), ctrlWrapper(getContactsControlle
 
 router.get('/:id', checkRoles(ROLES.CONTACTOWNER), ctrlWrapper(getContactByIdController));
 
-router.post('', checkRoles(ROLES.CONTACTOWNER),
-   // validateBody(createContactSchema),
+router.post('',
+    checkRoles(ROLES.CONTACTOWNER),
     upload.single('photo'),
+    validateBody(createContactSchema),
     ctrlWrapper(createContactController)
 )
 
 router.patch('/:id',
     checkRoles(ROLES.CONTACTOWNER),
-    validateBody(updateContactSchema),
     upload.single('photo'),
+    validateBody(updateContactSchema),
     ctrlWrapper(patchContactController))
 
 router.delete('/:id',
