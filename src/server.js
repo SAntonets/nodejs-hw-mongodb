@@ -7,6 +7,7 @@ import { env } from '../src/utils/env.js';
 import router from './routers/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import { UPLOAD_DIR } from './constants/index.js';
 
 
 
@@ -38,6 +39,8 @@ export const setupServer = () => {
     });
 
     app.use(router)
+
+    app.use('/uploads', express.static(UPLOAD_DIR));
 
     app.use(errorHandler);
 

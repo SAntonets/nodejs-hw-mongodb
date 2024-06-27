@@ -12,6 +12,7 @@ import { createContactSchema,
 import { authenticate } from "../middlewares/authenticate.js";
 import { checkRoles } from "../middlewares/checkRoles.js";
 import { ROLES } from "../constants/index.js";
+import { upload } from "../middlewares/multer.js";
 
 
 const router = Router();
@@ -24,12 +25,14 @@ router.get('/:id', checkRoles(ROLES.CONTACTOWNER), ctrlWrapper(getContactByIdCon
 
 router.post('', checkRoles(ROLES.CONTACTOWNER),
     validateBody(createContactSchema),
+    upload.single('photo'),
     ctrlWrapper(createContactController)
 )
 
 router.patch('/:id',
     checkRoles(ROLES.CONTACTOWNER),
     validateBody(updateContactSchema),
+    upload.single('photo'),
     ctrlWrapper(patchContactController))
 
 router.delete('/:id',
