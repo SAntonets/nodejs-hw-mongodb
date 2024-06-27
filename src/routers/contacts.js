@@ -24,7 +24,7 @@ router.get('/', checkRoles(ROLES.CONTACTOWNER), ctrlWrapper(getContactsControlle
 router.get('/:id', checkRoles(ROLES.CONTACTOWNER), ctrlWrapper(getContactByIdController));
 
 router.post('', checkRoles(ROLES.CONTACTOWNER),
-    validateBody(createContactSchema),
+   // validateBody(createContactSchema),
     upload.single('photo'),
     ctrlWrapper(createContactController)
 )

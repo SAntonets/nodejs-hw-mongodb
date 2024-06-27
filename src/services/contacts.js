@@ -62,12 +62,13 @@ export const getContactById = async (contactId, userId) => {
 }
 
 
-export const createContact = async (req) => {
+export const createContact = async (req, photoUrl) => {
 
 
   const contact = await contactsCollection.create({
     ...req.body,
     userId: req.user._id,
+    photo: photoUrl,
 });
     return contact;
 }
