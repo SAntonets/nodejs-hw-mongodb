@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 
 export const SORT_ORDER = {
     ASC: 'asc',
@@ -31,3 +33,5 @@ export const SMTP = {
   JWT_SECRET: 'JWT_SECRET',
   APP_DOMAIN: 'APP_DOMAIN',
 };
+
+export const TEMPLATES_DIR = path.join(process.cwd(), 'src', 'templates');
