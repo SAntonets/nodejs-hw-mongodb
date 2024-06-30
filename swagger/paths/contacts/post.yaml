@@ -1,0 +1,73 @@
+tags:
+  - Contacts
+summary: Create contact
+operationId: createContact
+description: 'Create contact with payload'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - name
+          - phoneNumber
+          - email
+          - isFavourite
+          - contactType
+          - userId
+          - photo
+        properties:
+          name:
+            description: 'The name of the contact'
+            type: string
+            example: 'John Doe'
+          phoneNumber:
+            description: 'The phone number of the contact'
+            type: string
+            example: '1234567890'
+          email:
+            description: 'The email of the contact'
+            type: string
+            example: 'jdoe@me.com'
+          isFavourite:
+            description: 'The favourite status of the contact'
+            type: boolean
+            example: true
+          contactType:
+            description: 'The type of the contact'
+            type: string
+            enum: ['work', 'home', 'personal']
+            example: 'work'
+          userId:
+            description: 'The id of the user'
+            type: string
+            example: '667d0d51c137f9dcde2e49d9'
+          photo:
+            description: 'The photo of the contact'
+            type: string
+            example: <'https://res.cloudinary.com/df82cctu3/image/upload/v1719663396/nxg7kamnq8xofslswd4a.jpg'>
+responses:
+  '201':
+    description: Create contact
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully created contact!
+            data:
+              type: object
+              $ref: ..\..\components\schemas\contact.yaml
+  '401':
+    $ref: ..\..\components\responses\401.yaml
