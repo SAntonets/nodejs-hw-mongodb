@@ -34,3 +34,62 @@ parameters:
       type: string
       enum: ['work', 'home', 'personal']
       example: 'home'
+    description: "All contact's fields can be mentioned. Default value - 'home'"
+  - in: query
+    name: isFavourite
+    schema:
+      type: boolean
+      example: true
+responses:
+  '200':
+    description: Successfully found all contacts
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Successfully found contacts!'
+            data:
+              type: object
+              required:
+                - data
+                - page
+                - perPage
+                - totalItems
+                - totalPages
+                - hasPreviousPage
+                - hasNextPage
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: ..\..\components\schemas\contact.yaml
+                page:
+                  type: number
+                  example: 1
+                perPage:
+                  type: number
+                  example: 10
+                totalItems:
+                  type: number
+                  example: 10
+                totalPages:
+                  type: number
+                  example: 2
+                hasPreviousPage:
+                  type: boolean
+                  example: false
+                hasNextPage:
+                  type: boolean
+                  example: false
+  '401':
+    $ref: ..\..\components\responses\401.yaml

@@ -1,0 +1,20 @@
+tags:
+  - deleteContact
+summary: Delete contact
+operationId: deleteContact
+description: 'Delete contact with payload'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    schema:
+      type: string
+      example: '667d0d51c137f9dcde2e49d9'
+    required: true
+    description: The contact id
+responses:
+  '204':
+    description: Contact deleted
+  '401':
+    $ref: ..\..\..\components\responses\401.yaml
