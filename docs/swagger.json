@@ -19,12 +19,8 @@
   ],
   "tags": [
     {
-      "name": "contacts",
-      "description": "Operations about contacts."
-    },
-    {
-      "name": "auth",
-      "description": "Auth operations."
+      "name": "Contacts",
+      "description": "Operations about contacts"
     }
   ],
   "paths": {
@@ -193,12 +189,7 @@
                 "type": "object",
                 "required": [
                   "name",
-                  "phoneNumber",
-                  "email",
-                  "isFavourite",
-                  "contactType",
-                  "userId",
-                  "photo"
+                  "phoneNumber"
                 ],
                 "properties": {
                   "name": {
@@ -285,7 +276,7 @@
     "/contacts/{id}": {
       "get": {
         "tags": [
-          "Contact"
+          "Contacts"
         ],
         "summary": "Get contact by id",
         "operationId": "getContact",
@@ -343,7 +334,7 @@
       },
       "patch": {
         "tags": [
-          "patch Contact"
+          "Contacts"
         ],
         "summary": "Patch contact",
         "operationId": "patchContact",
@@ -369,15 +360,6 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "name",
-                  "phoneNumber",
-                  "email",
-                  "isFavourite",
-                  "contactType",
-                  "userId",
-                  "photo"
-                ],
                 "properties": {
                   "name": {
                     "description": "The name of the contact",
@@ -461,7 +443,7 @@
       },
       "delete": {
         "tags": [
-          "deleteContact"
+          "Contacts"
         ],
         "summary": "Delete contact",
         "operationId": "deleteContact",

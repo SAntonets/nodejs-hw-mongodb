@@ -1,5 +1,5 @@
 tags:
-  - deleteContact
+  - Contacts
 summary: Delete contact
 operationId: deleteContact
 description: 'Delete contact with payload'

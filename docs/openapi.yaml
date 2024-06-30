@@ -8,10 +8,8 @@ info:
   description: >
     This is a documentation of contacts app
 tags:
-  - name: contacts
-    description: Operations about contacts.
-  - name: auth
-    description: Auth operations.
+  - name: Contacts
+    description: Operations about contacts
 servers:
   - url: <http://localhost:3000>
   - url: <https://nodejs-hw-crud.onrender.com>

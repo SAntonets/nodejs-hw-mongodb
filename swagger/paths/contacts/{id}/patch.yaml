@@ -1,5 +1,5 @@
 tags:
-  - patch Contact
+  - Contacts
 summary: Patch contact
 operationId: patchContact
 description: 'Patch contact with payload'
@@ -17,14 +17,6 @@ requestBody:
     multipart/form-data:
       schema:
         type: object
-        required:
-          - name
-          - phoneNumber
-          - email
-          - isFavourite
-          - contactType
-          - userId
-          - photo
         properties:
           name:
             description: 'The name of the contact'
